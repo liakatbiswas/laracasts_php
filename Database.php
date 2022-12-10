@@ -8,10 +8,12 @@ class Database
 {
  public $conn;
 
- public function __construct()
+ public function __construct($config, $user_name = 'root', $user_password = '')
  {
-  $dsn        = "mysql:host=localhost;port=3306;dbname=laracasts;user=root;charset=utf8mb4";
-  $this->conn = new PDO($dsn);
+  $dsn        = 'mysql:' . http_build_query($config, '', ';');
+  $this->conn = new PDO($dsn, $user_name, $user_password, [
+   PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+  ]);
  }
 
  public function query($query)

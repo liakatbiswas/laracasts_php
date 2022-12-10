@@ -1,12 +1,12 @@
 <?php
 require 'functions.php';
+// require 'router.php';
 require 'Database.php';
 
-// require 'router.php';
-// php -S localhost:8888
+$config = require 'config.php';
 
-// Connect to the database, and execute a query
-$db    = new Database();
-$posts = $db->query("SELECT * FROM posts")->fetchAll(PDO::FETCH_ASSOC);
+$db = new Database($config['database']);
+
+$posts = $db->query("SELECT * FROM posts")->fetchAll();
 
 dd($posts);
