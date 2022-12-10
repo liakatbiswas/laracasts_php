@@ -1,21 +1,23 @@
 <?php
+/**
+ * Connect to the database
+ * And execute a query
+ */
 
 class Database
 {
- public $connection;
+ public $conn;
 
  public function __construct()
  {
-  $dsn = "mysql:host=localhost;port=3306;dbname=laracasts;charset=utf8mb4;user=root";
-
-  $this->connection = new PDO($dsn);
+  $dsn        = "mysql:host=localhost;port=3306;dbname=laracasts;user=root;charset=utf8mb4";
+  $this->conn = new PDO($dsn);
  }
+
  public function query($query)
  {
-
-  $statement = $this->connection->prepare($query);
-  $statement->execute();
-
-  return $statement;
+  $stmt = $this->conn->prepare($query);
+  $stmt->execute();
+  return $stmt;
  }
 }
